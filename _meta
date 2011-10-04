@@ -1,0 +1,8 @@
+<package project="Mer:Trunk:Base" name="zlib">
+  <title>The zlib compression and decompression library</title>
+  <description>Zlib is a general-purpose, patent-free, lossless data compression
+library which is used by many different programs.
+
+</description>
+  <url>http://www.gzip.org/zlib/</url>
+</package>

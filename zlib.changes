@@ -1,0 +1,23 @@
+* Tue May 24 2011 Anas Nashif <anas.nashif@intel.com> - 1.2.5
+- Repackage documentaion/translations
+
+* Thu Dec 31 2010 Yan Yin <yan.yin@intel.com> - 1.2.5
+- Fix BMC #11751: incorrect large file support header in zlib package
+
+* Thu Dec 30 2010 Yan Yin <yan.yin@intel.com> - 1.2.5
+- Fix BMC #11752: optimization not used in all objects file in zlib
+
+* Fri Jul 02 2010 Yan Yin <yan.yin@intel.com> - 1.2.5
+- Upgrade to 1.2.5, drop old patches, keep profile guided optmization
+
+* Sun Feb 14 2010 Arjan van de Ven <arjan@linux.intel.com> 1.2.3
+- use profile guided optimization during the build
+
+* Thu May 7 2009 Arjan van de Ven <arjan@linux.intel.com>
+- fix for LD_AS_NEEDED=1
+
+* Tue Jan 13 2009 Anas Nashif <anas.nashif@intel.com> 1.2.3
+- Pre-Require ldconfig
+
+* Fri Dec 05 2008 Arjan van de Ven <arjan@linux.intel.com> 1.2.3
+- Minor cleanups
