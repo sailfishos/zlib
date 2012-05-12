@@ -1,3 +1,9 @@
+* Sat May 12 2012 Carsten Munk <carsten.munk@gmail.com> - 1.2.7
+- Upgrade to 1.2.7
+- Add SSE2/SSSE3 etc optimizations, from https://github.com/kaffeemonster/zlib/commits/adler32_vec
+  Needs auxv work for ARM before enablement of NEON.
+- Disable adler32 profile usage for X86
+
 * Mon Feb 13 2012 Marko Saukko <marko.saukko@gmail.com> - 1.2.6
 - Updated to version 1.2.6
 - Dropped merged patches: zlib-1.2.5-lfs-decls-bmc-11751.patch and

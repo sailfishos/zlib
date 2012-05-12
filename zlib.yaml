@@ -1,12 +1,14 @@
 Name: zlib
 Summary: The zlib compression and decompression library
-Version: 1.2.6
+Version: 1.2.7
 Release: 1
 Group: System/Libraries
 License: zlib and Boost
 URL: http://www.gzip.org/zlib/
 Sources:
     - http://www.zlib.net/zlib-%{version}.tar.bz2
+Patches:
+    - zlib-1.2.7-adler32_vec_kaffeemonster.patch
 Description: |
     Zlib is a general-purpose, patent-free, lossless data compression
     library which is used by many different programs.
