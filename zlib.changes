@@ -1,3 +1,6 @@
+* Sat Oct 06 2012 Marko Saukko <marko.saukko@jollamobile.com> - 1.2.7
+- Contributing to MER#174 by moving libs under /usr.
+
 * Sat May 12 2012 Carsten Munk <carsten.munk@gmail.com> - 1.2.7
 - Upgrade to 1.2.7
 - Add SSE2/SSSE3 etc optimizations, from https://github.com/kaffeemonster/zlib/commits/adler32_vec
