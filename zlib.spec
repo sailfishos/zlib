@@ -76,8 +76,10 @@ library.
 %prep
 %setup -q -n %{name}-%{version}
 
+%ifnarch x86_64
 # zlib-1.2.7-adler32_vec_kaffeemonster.patch
 %patch0 -p1
+%endif
 # >> setup
 mkdir contrib/minizip/m4
 # << setup

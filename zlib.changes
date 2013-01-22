@@ -1,3 +1,6 @@
+* Tue Jan 22 2013 Oleg Girko <ol+mer@infoserver.ru> - 1.2.7
+- Disable asm-optimised adler32 for x86_64 for now: breaks compilation.
+
 * Sat Oct 06 2012 Marko Saukko <marko.saukko@jollamobile.com> - 1.2.7
 - Contributing to MER#174 by moving libs under /usr.
 
