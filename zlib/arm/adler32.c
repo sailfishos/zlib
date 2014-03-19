@@ -190,9 +190,9 @@ local noinline uLong adler32_vec(adler, buf, len)
             /* add k times vs1 for this trailer */
             vs2 = vmlaq_u32(vs2, vs1, vdupq_n_u32(k));
 
-            /* get input data */
-            in16 = *(const uint8x16_t *)buf;
-            /* masks out bad data */
+            /* get input data, don't read past the end of buf */
+            memcpy(&in16, buf, k);
+            /* mask out bad data */
             in16 = neon_simple_alignq(v0, in16, k);
 
             /* pairwise add bytes and long, pairwise add word long acc */
