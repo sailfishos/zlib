@@ -11,7 +11,6 @@ License:    zlib and Boost
 URL:        http://www.gzip.org/zlib/
 Source0:    http://www.zlib.net/%{name}-%{version}.tar.gz
 Source100:  zlib.yaml
-Patch0:     zlib-1.2.7-adler32_vec_kaffeemonster.patch
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  automake
@@ -68,8 +67,6 @@ library.
 %prep
 %setup -q -n %{name}-%{version}/%{name}
 
-# zlib-1.2.7-adler32_vec_kaffeemonster.patch
-%patch0 -p1
 mkdir contrib/minizip/m4
 
 %build
