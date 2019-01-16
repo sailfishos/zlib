@@ -5,12 +5,11 @@ Name:       zlib
 
 Summary:    The zlib compression and decompression library
 Version:    1.2.8
-Release:    1
+Release:    2
 Group:      System/Libraries
 License:    zlib and Boost
 URL:        http://www.gzip.org/zlib/
 Source0:    http://www.zlib.net/%{name}-%{version}.tar.gz
-Source100:  zlib.yaml
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  automake
@@ -62,6 +61,15 @@ Requires:   %{name} = %{version}-%{release}
 The zlib-devel package contains the header files and libraries needed
 to develop programs that use the zlib compression and decompression
 library.
+
+
+%package doc
+Summary:   Documentation for %{name}
+Group:     Documentation
+Requires:  %{name} = %{version}-%{release}
+
+%description doc
+Man pages and other documentation for %{name} and minizip.
 
 
 %prep
@@ -123,6 +131,12 @@ make %{?_smp_mflags}
 rm -rf %{buildroot}
 %make_install
 
+mkdir -p $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
+install -m0644 -t $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version} \
+        README doc/algorithm.txt test/example.c ChangeLog FAQ \
+        contrib/minizip/MiniZip64_info.txt \
+        contrib/minizip/MiniZip64_Changes.txt
+
 cd contrib/minizip
 make install DESTDIR=$RPM_BUILD_ROOT
 
@@ -145,12 +159,11 @@ make test
 
 %files static
 %defattr(-,root,root,-)
-%doc README
+%license README
 %{_libdir}/libz.a
 
 %files -n minizip
 %defattr(-,root,root,-)
-%doc contrib/minizip/MiniZip64_info.txt contrib/minizip/MiniZip64_Changes.txt
 %{_libdir}/libminizip.so.*
 
 %files -n minizip-devel
@@ -162,9 +175,12 @@ make test
 
 %files devel
 %defattr(-,root,root,-)
-%doc README doc/algorithm.txt test/example.c ChangeLog FAQ
 %{_libdir}/libz.so
 %{_includedir}/zconf.h
 %{_includedir}/zlib.h
-%{_mandir}/man3/zlib.3*
 %{_libdir}/pkgconfig/zlib.pc
+
+%files doc
+%defattr(-,root,root,-)
+%{_mandir}/man*/%{name}.*
+%{_docdir}/%{name}-%{version}

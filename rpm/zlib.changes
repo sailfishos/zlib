@@ -1,3 +1,6 @@
+* Mon Jan 14 2019 Tomi Leppänen <tomi.leppanen@jolla.com> - 1.2.8-2
+- [packaging] Add zlib-doc subpackage. Contributes to JB#24119
+
 * Mon Dec 02 2013 Mohammed Hassan <mohammed.hassan@jolla.com> - 1.2.8
 - Enable NEON for arm
 - Update to 1.2.8
