@@ -4,12 +4,13 @@ Name:       zlib
 %define keepstatic 1
 
 Summary:    The zlib compression and decompression library
-Version:    1.2.8
-Release:    2
+Version:    1.2.11
+Release:    1
 Group:      System/Libraries
 License:    zlib and Boost
-URL:        http://www.gzip.org/zlib/
-Source0:    http://www.zlib.net/%{name}-%{version}.tar.gz
+URL:        https://zlib.net
+Source0:    https://zlib.net/%{name}-%{version}.tar.gz
+Patch1:     0001-zlib-arm-vec.patch
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  automake
@@ -73,9 +74,8 @@ Man pages and other documentation for %{name} and minizip.
 
 
 %prep
-%setup -q -n %{name}-%{version}/%{name}
-
-mkdir contrib/minizip/m4
+%setup -q -n %{name}-%{version}/upstream
+%patch1 -p1
 
 %build
 %ifarch  %{arm}
