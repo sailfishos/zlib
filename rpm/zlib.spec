@@ -123,7 +123,28 @@ make %{?_smp_mflags} CFLAGS="$CFLAGS -DHAVE_BINUTILS=%{binutils_ver}"  SFLAGS="$
 %endif
 make %{?_smp_mflags} CFLAGS="$CFLAGS -fprofile-use -DHAVE_BINUTILS=%{binutils_ver}"  SFLAGS="$SFLAGS -fprofile-use"
 cd contrib/minizip
+%ifnarch x86_64
 %reconfigure --disable-static
+%else
+autoreconf -v --install --force || exit 1
+./configure --build=%{_build} --host=%{_host} \
+	--target=%{_target_platform} \
+	--program-prefix=%{?_program_prefix} \
+	--prefix=%{_prefix} \
+	--exec-prefix=%{_exec_prefix} \
+	--bindir=%{_bindir} \
+	--sbindir=%{_sbindir} \
+	--sysconfdir=%{_sysconfdir} \
+	--datadir=%{_datadir} \
+	--includedir=%{_includedir} \
+	--libdir=%{_libdir} \
+	--libexecdir=%{_libexecdir} \
+	--localstatedir=%{_localstatedir} \
+	--sharedstatedir=%{_sharedstatedir} \
+	--mandir=%{_mandir} \
+	--infodir=%{_infodir} \
+	--disable-static
+%endif
 export CFLAGS="$RPM_OPT_FLAGS -DHAVE_BINUTILS=%{binutils_ver}"
 make %{?_smp_mflags}
 
