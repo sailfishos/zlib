@@ -8,8 +8,8 @@ Version:    1.2.11
 Release:    1
 Group:      System/Libraries
 License:    zlib and Boost
-URL:        https://zlib.net
-Source0:    https://zlib.net/%{name}-%{version}.tar.gz
+URL:        https://github.com/sailfishos/zlib
+Source0:    %{name}-%{version}.tar.gz
 Patch1:     0001-zlib-arm-vec.patch
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
