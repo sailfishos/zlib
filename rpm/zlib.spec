@@ -6,7 +6,6 @@ Name:       zlib
 Summary:    The zlib compression and decompression library
 Version:    1.2.11
 Release:    1
-Group:      System/Libraries
 License:    zlib and Boost
 URL:        https://github.com/sailfishos/zlib
 Source0:    %{name}-%{version}.tar.gz
@@ -24,7 +23,6 @@ library which is used by many different programs.
 
 %package static
 Summary:    Static libraries for Zlib development
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description static
@@ -35,7 +33,6 @@ decompression library.
 
 %package -n minizip
 Summary:    Minizip manipulates files from a .zip archive
-Group:      System/Libraries
 Requires:   %{name} = %{version}-%{release}
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -45,7 +42,6 @@ Minizip manipulates files from a .zip archive.
 
 %package -n minizip-devel
 Summary:    Development files for the minizip library
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description -n minizip-devel
@@ -55,7 +51,6 @@ developing applications which use minizip.
 
 %package devel
 Summary:    Header files and libraries for Zlib development
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 
 %description devel
@@ -66,7 +61,6 @@ library.
 
 %package doc
 Summary:   Documentation for %{name}
-Group:     Documentation
 Requires:  %{name} = %{version}-%{release}
 
 %description doc
