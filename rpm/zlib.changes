@@ -22,15 +22,3 @@
 - Dropped merged patches: zlib-1.2.5-lfs-decls-bmc-11751.patch and
   zlib-1.2.4-autotools.patch
 - Added .yaml for spectacle
-
-* Tue May 24 2011 Anas Nashif <anas.nashif@intel.com> - 1.2.5
-- Repackage documentaion/translations
-
-* Thu Dec 31 2010 Yan Yin <yan.yin@intel.com> - 1.2.5
-- Fix BMC #11751: incorrect large file support header in zlib package
-
-* Thu Dec 30 2010 Yan Yin <yan.yin@intel.com> - 1.2.5
-- Fix BMC #11752: optimization not used in all objects file in zlib
-
-* Fri Jul 02 2010 Yan Yin <yan.yin@intel.com> - 1.2.5
-- Upgrade to 1.2.5, drop old patches, keep profile guided optmization

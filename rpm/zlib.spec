@@ -4,12 +4,11 @@ Name:       zlib
 %define keepstatic 1
 
 Summary:    The zlib compression and decompression library
-Version:    1.2.11
+Version:    1.2.13
 Release:    1
 License:    zlib and Boost
 URL:        https://github.com/sailfishos/zlib
 Source0:    %{name}-%{version}.tar.gz
-Patch1:     0001-zlib-arm-vec.patch
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  automake
@@ -69,7 +68,6 @@ Man pages and other documentation for %{name} and minizip.
 
 %prep
 %setup -q -n %{name}-%{version}/upstream
-%patch1 -p1
 
 %build
 %ifarch  %{arm}
