@@ -147,15 +147,17 @@ make test
 
 %files
 %defattr(-,root,root,-)
+%license LICENSE
 %{_libdir}/libz.so.*
 
 %files static
 %defattr(-,root,root,-)
-%license README
+%license LICENSE
 %{_libdir}/libz.a
 
 %files -n minizip
 %defattr(-,root,root,-)
+%license LICENSE
 %{_libdir}/libminizip.so.*
 
 %files -n minizip-devel
