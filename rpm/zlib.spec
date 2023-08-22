@@ -4,7 +4,7 @@ Name:       zlib
 %define keepstatic 1
 
 Summary:    The zlib compression and decompression library
-Version:    1.2.13
+Version:    1.3
 Release:    1
 License:    zlib and Boost
 URL:        https://github.com/sailfishos/zlib
@@ -70,57 +70,19 @@ Man pages and other documentation for %{name} and minizip.
 %setup -q -n %{name}-%{version}/upstream
 
 %build
-%ifarch  %{arm}
-export CFLAGS="$RPM_OPT_FLAGS -mfpu=neon"
-%else
-export CFLAGS="$RPM_OPT_FLAGS"
-%endif
-
+export CFLAGS="$RPM_OPT_FLAGS -fPIC"
+export LDFLAGS="$LDFLAGS -Wl,-z,relro -Wl,-z,now"
 ./configure --libdir=%{_libdir} --includedir=%{_includedir} --prefix=%{_prefix}
 
-#ensure 64 offset versions are compiled (do not override CFLAGS blindly)
-export CFLAGS="`grep -E ^CFLAGS Makefile | sed -e 's/CFLAGS=//'`"
-export SFLAGS="`grep -E ^SFLAGS Makefile | sed -e 's/SFLAGS=//'`"
+%make_build
 
-#
-# first,build with -fprofile-generate to create the profile data
-#
-make %{?_smp_mflags} CFLAGS="$CFLAGS -pg -fprofile-generate" SFLAGS="$SFLAGS -pg -fprofile-generate"
-
-#
-# Then run some basic operations using the minigzip test program
-# to collect the profile guided stats
-# (in this case, we compress and decompress the content of /usr/bin)
-#
-cp Makefile Makefile.old
-make test -f Makefile.old LDFLAGS="libz.a -lgcov"
-cat /usr/bin/* | ./minigzip | ./minigzip -d &> /dev/null
-
-#
-# Now that we have the stats, we need to build again, using -fprofile-use
-# Due to the libtool funnies, we need to hand copy the profile data to .libs
-#
-mkdir libs-tmp
-cp *gcda libs-tmp
-make clean
-mv libs-tmp/*gcda .
-rm -rf libs-tmp
-
-#
-# Final build, with -fprofile-use
-#
-
-%ifarch %{ix86} x86_64
-make %{?_smp_mflags} CFLAGS="$CFLAGS -DHAVE_BINUTILS=%{binutils_ver}"  SFLAGS="$SFLAGS " adler32.o adler32.lo
-%endif
-make %{?_smp_mflags} CFLAGS="$CFLAGS -fprofile-use -DHAVE_BINUTILS=%{binutils_ver}"  SFLAGS="$SFLAGS -fprofile-use"
-cd contrib/minizip
-%reconfigure --disable-static
-export CFLAGS="$RPM_OPT_FLAGS -DHAVE_BINUTILS=%{binutils_ver}"
-make %{?_smp_mflags}
+pushd contrib/minizip
+autoreconf --install
+%configure --enable-static=no
+%make_build
+popd
 
 %install
-rm -rf %{buildroot}
 %make_install
 
 mkdir -p $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version}
@@ -129,10 +91,13 @@ install -m0644 -t $RPM_BUILD_ROOT%{_docdir}/%{name}-%{version} \
         contrib/minizip/MiniZip64_info.txt \
         contrib/minizip/MiniZip64_Changes.txt
 
-cd contrib/minizip
-make install DESTDIR=$RPM_BUILD_ROOT
+pushd contrib/minizip
+%make_install
+# https://github.com/madler/zlib/pull/229
+rm $RPM_BUILD_ROOT%_includedir/minizip/crypt.h
 
-rm $RPM_BUILD_ROOT%{_libdir}/*.la
+find $RPM_BUILD_ROOT -name '*.la' -delete
+popd
 
 %check
 make test
