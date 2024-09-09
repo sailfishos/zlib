@@ -4,12 +4,11 @@ Name:       zlib
 %define keepstatic 1
 
 Summary:    The zlib compression and decompression library
-Version:    1.3
+Version:    1.3.1
 Release:    1
 License:    zlib and Boost
 URL:        https://github.com/sailfishos/zlib
 Source0:    %{name}-%{version}.tar.gz
-Patch0:     backport-Reject-overflows-of-zip-header-fields-in-minizip.patch
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  automake
@@ -111,35 +110,29 @@ make test
 %postun -n minizip -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
 %license LICENSE
 %{_libdir}/libz.so.*
 
 %files static
-%defattr(-,root,root,-)
 %license LICENSE
 %{_libdir}/libz.a
 
 %files -n minizip
-%defattr(-,root,root,-)
 %license LICENSE
 %{_libdir}/libminizip.so.*
 
 %files -n minizip-devel
-%defattr(-,root,root,-)
 %dir %{_includedir}/minizip
 %{_includedir}/minizip/*.h
 %{_libdir}/libminizip.so
 %{_libdir}/pkgconfig/minizip.pc
 
 %files devel
-%defattr(-,root,root,-)
 %{_libdir}/libz.so
 %{_includedir}/zconf.h
 %{_includedir}/zlib.h
 %{_libdir}/pkgconfig/zlib.pc
 
 %files doc
-%defattr(-,root,root,-)
 %{_mandir}/man*/%{name}.*
 %{_docdir}/%{name}-%{version}
