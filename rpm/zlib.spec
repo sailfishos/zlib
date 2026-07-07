@@ -4,7 +4,7 @@ Name:       zlib
 %define keepstatic 1
 
 Summary:    The zlib compression and decompression library
-Version:    1.3.1
+Version:    1.3.2
 Release:    1
 License:    zlib and Boost
 URL:        https://github.com/sailfishos/zlib
